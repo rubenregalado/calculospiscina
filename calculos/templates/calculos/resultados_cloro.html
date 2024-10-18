@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Dosificación</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #005e9e;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .resultados {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        button {
+            background-color: #f6b81f;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:active {
+            background-color: white;
+            color: #f6b81f;
+            border: 1px solid #f6b81f;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+                padding: 15px;
+            }
+            h1, h2 {
+                font-size: 24px;
+            }
+            p {
+                font-size: 16px;
+            }
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .logo img {
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 20px;
+            }
+            p {
+                font-size: 14px;
+            }
+            button {
+                font-size: 12px;
+                padding: 6px;
+            }
+            .logo img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo de la empresa -->
+    <div class="logo">
+        <img src="{% static 'calculos/images/logo.png' %}" alt="Logo de la Empresa">
+    </div>
+
+    <div class="container">
+        <h1>Resultados de Dosificación de Químicos</h1>
+
+        <div class="resultados">
+            <h2>Cloro</h2>
+            <p>Cantidad de tricloro a añadir: {{ cloro_onzas|floatformat:2 }} onzas</p>
+
+            <h2>Alguicida</h2>
+            <p>Alguicida para tratamiento de shock: {{ alguicida_ml_shock|floatformat:2 }} mL</p>
+            <p>Alguicida para tratamiento de mantenimiento: {{ alguicida_ml_mantenimiento|floatformat:2 }} mL</p>
+
+            <h2>Clarificador</h2>
+            <p>Clarificador para tratamiento de shock: {{ clarificador_ml_shock|floatformat:2 }} mL</p>
+            <p>Clarificador para tratamiento de mantenimiento: {{ clarificador_ml_mantenimiento|floatformat:2 }} mL</p>
+        </div>
+
+        <button onclick="redirectToCalculation()">Volver a calcular</button>
+    </div>
+
+    <script>
+        function redirectToCalculation() {
+            window.location.href = "{% url 'calcular_dosificacion' %}";
+        }
+    </script>
+</body>
+</html>

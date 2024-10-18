@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Químicos</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #005e9e;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #f6b81f;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:active {
+            background-color: white;
+            color: #f6b81f;
+            border: 1px solid #f6b81f;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .logo img {
+            height: 60px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .logo img {
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+            button {
+                font-size: 12px;
+                padding: 6px;
+            }
+            .logo img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo de la empresa -->
+    <div class="logo">
+        <img src="{% static 'calculos/images/logo.png' %}" alt="Logo de la Empresa">
+    </div>
+
+    <div class="container">
+        <h1>Calcula la dosificación de Tricloro</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="largo">Largo de la piscina (m):</label>
+            <input type="text" name="largo" required>
+
+            <label for="ancho">Ancho de la piscina (m):</label>
+            <input type="text" name="ancho" required>
+
+            <label for="profundidad">Profundidad de la piscina (m):</label>
+            <input type="text" name="profundidad" required>
+
+            <label for="conc_inicial">Concentración inicial de cloro (ppm):</label>
+            <input type="text" name="conc_inicial" required>
+
+            <label for="tipo_piscina">Tipo de piscina:</label>
+            <select name="tipo_piscina" required>
+                <option value="publica">Pública</option>
+                <option value="privada">Privada/Residencial</option>
+            </select>
+
+            <button type="submit">Calcular Químico</button>
+        </form>
+    </div>
+</body>
+</html>
